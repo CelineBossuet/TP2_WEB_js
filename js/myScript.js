@@ -88,23 +88,21 @@ class Cell {
         this.j=j
         this.state=0
         this.previousState=0
-        this.draw('white', 'blue')
-    }
-    live() {
-        this.state=1
-        this.draw('cyan', 'blue')
-    }
-    die() {
-        this.state=0
-        this.draw('white', 'blue')
-    }
-    draw(color, stroke){
         this.shape=paper.Path.Circle(
             {center : life.coords(this.i, this.j), 
                 radius : cellSize/2, 
-                fillColor : color,
-                strokeColor : stroke})
+                fillColor : 'white',
+                strokeColor : 'blue'})
     }
+    live() {
+        this.state=1
+        this.shape.fillColor = 'red'
+    }
+    die() {
+        this.state=0
+        this.shape.fillColor = 'white'
+    }
+        
 
 }
 function onKeyUp(event){
