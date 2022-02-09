@@ -1,0 +1,53 @@
+stages:                 # Les étapes associées au projet.
+  - lint                # Pour la vérification statique du code 
+  - build               # fabrication de l'application
+  - test                # Test de l'application
+  - deploy              # Deploiement
+
+lint-html-css:          # Vérification de la qualité du code html et css
+  stage: lint           # Dans l'étape lint
+  tags:
+    - docker
+  images: node
+  script:
+    - npm install htmlhint stylelint stylelint-config-standard
+    - npx htmlhint --config .htmlhint.rc *.html > linthtml_report.txt
+    - npx stylelint *.css > lintcss_report.txt
+  artifacts:            # Les rapports seront disponibles pour d'autres jobs
+    paths:
+      - linthtml_report.txt
+      - lintcss_report.txt
+
+lint-js:                # Vérification de la qualité du code javascript
+  stage: lint           # Dans l'étape lint (s'exécutera en parallèle de lint-html-css)
+  tags:
+    - docker
+  images: node
+  script:
+    - npm install eslint
+    - npx eslint *.js > lintes_report.txt
+  artifacts:            # Le rapport sera disponible pour d'autres jobs
+    paths:
+      - lintes_report.txt
+
+minify:                 # Etape de fabrication, ici on réduit l'empreinte carbone du site en 
+                        # Réduisant le volume de chaque ressource
+  stage: build
+  tags:
+    - docker
+  images: node
+  script:
+    - npm install minify
+    - mkdir -p build
+    - for f in *.{html,css,js}; do npx minify "$f" > "build/$f"
+  artifacts:
+    paths:
+      - build
+
+pages:                  # Job associé à la publication du site
+  stage: deploy
+  scripts:
+    - mkdir -p public
+    - cp * public/
+  dependencies:         # Comme on copie les fichiers générés dans l'étape de minify il faut en disposer
+    - minify
