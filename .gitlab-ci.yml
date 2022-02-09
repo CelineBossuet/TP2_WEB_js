@@ -7,7 +7,7 @@ lint-html-css:          # Vérification de la qualité du code html et css
   stage: lint           # Dans l'étape lint
   tags:
     - docker
-  images: node
+  image: node
   script:
     - npm install htmlhint stylelint stylelint-config-standard
     - npx htmlhint --config .htmlhint.rc *.html > linthtml_report.txt
@@ -21,7 +21,7 @@ lint-js:                # Vérification de la qualité du code javascript
   stage: lint           # Dans l'étape lint (s'exécutera en parallèle de lint-html-css)
   tags:
     - docker
-  images: node
+  image: node
   script:
     - npm install eslint
     - npx eslint *.js > lintes_report.txt
@@ -34,7 +34,7 @@ minify:                 # Etape de fabrication, ici on réduit l'empreinte carbo
   stage: build
   tags:
     - docker
-  images: node
+  image: node
   script:
     - npm install minify
     - mkdir -p build
