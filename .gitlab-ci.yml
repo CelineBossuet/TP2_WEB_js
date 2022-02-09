@@ -45,7 +45,7 @@ minify:                 # Etape de fabrication, ici on réduit l'empreinte carbo
 
 pages:                  # Job associé à la publication du site
   stage: deploy
-  scripts:
+  script:
     - mkdir -p public
     - cp * public/
   dependencies:         # Comme on copie les fichiers générés dans l'étape de minify il faut en disposer
