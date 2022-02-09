@@ -125,9 +125,20 @@ window.addEventListener("load",
         paper.setup(canvas)
         paper.view.setOnFrame(onFrame)
         life.init()
-        life.board[5*size+4].live();
-        life.board[5*size+5].live();
-        life.board[5*size+6].live();
+        life.board[5*size + 4].live();
+        life.board[5*size + 5].live();
+        life.board[5*size + 6].live();
+        life.board[5*size + 7].live();
+        life.board[5*size + 8].live();
+    
+        life.board[9*size + 4].live();
+        life.board[9*size + 5].live();
+        life.board[9*size + 6].live();
+        life.board[9*size + 7].live();
+        life.board[9*size + 8].live();
+    
+        life.board[7*size + 8].live();
+        life.board[7*size + 4].live();
         // Placer le code à exécuter ici pour qu'il le soit une fois la page 
         // chargée dans son intégralité
     }
