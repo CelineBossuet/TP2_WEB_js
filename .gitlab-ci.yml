@@ -18,5 +18,3 @@ pages:                  # Job associé à la publication du site
   script:
     - mkdir -p public
     - cp * public/
-  dependencies:         # Comme on copie les fichiers générés dans l'étape de minify il faut en disposer
-    - minify
