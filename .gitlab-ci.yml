@@ -1,7 +1,6 @@
 stages:                 # Les étapes associées au projet.
   - lint                # Pour la vérification statique du code 
   - build               # fabrication de l'application
-  - test                # Test de l'application
   - deploy              # Deploiement
 
 lint-html-css:          # Vérification de la qualité du code html et css
