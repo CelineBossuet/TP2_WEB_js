@@ -3,15 +3,6 @@ stages:                 # Les étapes associées au projet.
   - build               # fabrication de l'application
   - deploy              # Deploiement
 
-lint-html-css:          # Vérification de la qualité du code html et css
-  stage: lint           # Dans l'étape lint
-  tags:
-    - docker
-  image: node
-  script:
-    - npm install htmlhint stylelint stylelint-config-standard
-    - npx htmlhint --config .htmlhint.rc *.html > linthtml_report.txt
-    - npx stylelint *.css 
 
 lint-js:                # Vérification de la qualité du code javascript
   stage: lint           # Dans l'étape lint (s'exécutera en parallèle de lint-html-css)
