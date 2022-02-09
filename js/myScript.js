@@ -13,6 +13,7 @@ const life = {
         return [this.borderX() + i*cellSize, this.borderY() + j*cellSize]
     },
     init : function(){
+        //ajoute toutes les cellules au plateau board
         for (let i =0; i<size; i++){
             for (let j = 0; j<size; j++){
                 this.board.push(new Cell(i,j))
@@ -21,12 +22,14 @@ const life = {
     },
 
     saveState : function(){
+        //permet de freeze le plateau pour s'occuper de l'état suivant
         for (let i=0; i<size*size; i++){
             this.board[i].previousState=this.board[i].state
         }
     },
 
     getPreviousState : function(i,j){
+        //donne l'état précédant 
         if (i<size && j<size && i>=0 && j >=0){
             console.log(i, j)
             return this.board[i*size+j].previousState
@@ -36,14 +39,12 @@ const life = {
     },
 
     newState : function(i, j){
+        //fonction permettant de trouver les nouveaux états en fonctions des voisins
         let status = this.getPreviousState(i, j)
         let nb_vivante = 0
-        console.log("i , j", i, j)
-        for (let k = i-1; k < i+2; k++){
+        for (let k = i-1; k < i+2; k++){ //regarde tous les voisins
             for (let l= j-1; l < j+2; l++){
-                console.log(k,l)
                 if (i != k || j != l && k<size && l<size && k>=0 && l >=0){
-                    console.log("on rentre dans le if !")
                     nb_vivante += this.getPreviousState(k, l)
                 }
             }
@@ -51,22 +52,21 @@ const life = {
         if (status == 0){
             if (nb_vivante == 3){
                 return 1
-            }
-            else{
+            }else{
                 return 0
             }
         }
         else{
             if (nb_vivante == 2 || nb_vivante == 3){
                 return 1
-            }
-            else{
+            }else{
                 return 0
             }
         }
     },
 
     iterate : function(){
+        //permet de changer l'état de la grille complète
         this.saveState()
         for (let i = 0; i < size; i++){
             for (let j = 0; j < size; j++){
@@ -96,6 +96,7 @@ class Cell {
                 onMouseDown: this.toggleState.bind(this)})
     }
     toggleState(){
+        //petit bonus : partie gérant le click souris pour tuer/faire revivre une cellule
         if(this.state == 0){
             this.live();
         }else{
@@ -116,6 +117,7 @@ class Cell {
 
 
 function onFrame(){
+    //permet d'iterer à chaque frame
     life.iterate()
 }
 
@@ -125,6 +127,7 @@ function onKeyUp(event){
         console.log("Step")
         life.iterate()
     }
+    //petit bonus on peut cliquer sur des ronds pour les live/die puis cliquer sur p pour lancer l'animation
     if(event.key=='p'){
         paper.view.setOnFrame(onFrame)
     }
@@ -136,9 +139,25 @@ window.addEventListener("load",
         let canvas = document.getElementById("myCanvas")
         paper.setup(canvas)
         //paper.view.setOnFrame(onFrame)
-        life.init()
+        life.init() //init toutes nos cellules à dead
+
+        //config de base
+        life.board[5*size+4].live();
+        life.board[5*size+5].live();
+        life.board[5*size+6].live();
+        life.board[5*size+7].live();
+        life.board[5*size+8].live();
     
+        life.board[9*size+4].live();
+        life.board[9*size+5].live();
+        life.board[9*size+6].live();
+        life.board[9*size+7].live();
+        life.board[9*size+8].live();
+    
+        life.board[7*size+8].live();
+        life.board[7*size+4].live();
         // Placer le code à exécuter ici pour qu'il le soit une fois la page 
         // chargée dans son intégralité
+
     }
 )
