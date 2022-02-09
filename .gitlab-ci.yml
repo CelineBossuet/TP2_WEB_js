@@ -17,4 +17,4 @@ pages:                  # Job associé à la publication du site
   stage: deploy
   script:
     - mkdir -p public
-    - cp * public/
+    - cp -r * public/
