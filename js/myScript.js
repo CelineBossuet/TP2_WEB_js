@@ -92,7 +92,15 @@ class Cell {
             {center : life.coords(this.i, this.j), 
                 radius : cellSize/2, 
                 fillColor : 'white',
-                strokeColor : 'blue'})
+                strokeColor : 'blue', 
+                onMouseDown: this.toggleState.bind(this)})
+    }
+    toggleState(){
+        if(this.state == 0){
+            this.live();
+        }else{
+            this.die();
+        }
     }
     live() {
         this.state=1
@@ -105,38 +113,31 @@ class Cell {
         
 
 }
-function onKeyUp(event){
-    if(event.key=='g'){
-        console.log("Step")
-        life.iterate()
-    }
-}
-window.addEventListener("keyup",onKeyUp);
+
 
 function onFrame(){
     life.iterate()
 }
 
+
+function onKeyUp(event){
+    if(event.key=='g'){
+        console.log("Step")
+        life.iterate()
+    }
+    if(event.key=='p'){
+        paper.view.setOnFrame(onFrame)
+    }
+}
+window.addEventListener("keyup",onKeyUp);
+
 window.addEventListener("load",
     function(){
         let canvas = document.getElementById("myCanvas")
         paper.setup(canvas)
-        paper.view.setOnFrame(onFrame)
+        //paper.view.setOnFrame(onFrame)
         life.init()
-        life.board[5*size + 4].live();
-        life.board[5*size + 5].live();
-        life.board[5*size + 6].live();
-        life.board[5*size + 7].live();
-        life.board[5*size + 8].live();
     
-        life.board[9*size + 4].live();
-        life.board[9*size + 5].live();
-        life.board[9*size + 6].live();
-        life.board[9*size + 7].live();
-        life.board[9*size + 8].live();
-    
-        life.board[7*size + 8].live();
-        life.board[7*size + 4].live();
         // Placer le code à exécuter ici pour qu'il le soit une fois la page 
         // chargée dans son intégralité
     }
