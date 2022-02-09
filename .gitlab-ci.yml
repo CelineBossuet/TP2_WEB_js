@@ -1,6 +1,5 @@
 stages:                 # Les étapes associées au projet.
   - lint                # Pour la vérification statique du code 
-  - build               # fabrication de l'application
   - deploy              # Deploiement
 
 
@@ -13,20 +12,6 @@ lint-js:                # Vérification de la qualité du code javascript
     - npm install eslint
     - npx eslint *.js
 
-
-minify:                 # Etape de fabrication, ici on réduit l'empreinte carbone du site en 
-                        # Réduisant le volume de chaque ressource
-  stage: build
-  tags:
-    - docker
-  image: node
-  script:
-    - npm install minify
-    - mkdir -p build
-    - for f in *.{html,css,js}; do npx minify "$f" > "build/$f"
-  artifacts:
-    paths:
-      - build
 
 pages:                  # Job associé à la publication du site
   stage: deploy
