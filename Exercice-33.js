@@ -1,4 +1,4 @@
-window.onload=function(e){
+window.onload=function(){
 
     function switchMenu(){
         var elem = document.getElementById("menu")

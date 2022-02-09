@@ -1,4 +1,4 @@
-window.onload=function(e){
+window.onload=function(){
 
 function bouton1(){
     var elem = document.getElementById('contents')

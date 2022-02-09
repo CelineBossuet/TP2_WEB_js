@@ -1,13 +1,13 @@
 function modif(){
-    corps = document.querySelector('body')
-    liste = document.createElement("ul")
-    point1 = document.createElement("li")
-    point2 = document.createElement("li")
-    point3 = document.createElement("li")
-
-    one = document.createTextNode("one")
-    two = document.createTextNode("two")
-    three = document.createTextNode("three")
+    let corps = document.querySelector('body')
+    let liste = document.createElement("ul")
+    let point1 = document.createElement("li")
+    let point2 = document.createElement("li")
+    let point3 = document.createElement("li")
+    
+    let one = document.createTextNode("one")
+    let two = document.createTextNode("two")
+    let three = document.createTextNode("three")
 
     point1.appendChild(one)
     point2.appendChild(two)
