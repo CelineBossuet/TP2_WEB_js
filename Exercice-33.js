@@ -13,17 +13,24 @@ window.onload=function(){
 
     function switchTheme(){
         var theme = document.getElementById("ltheme").selectedIndex
+        var menu= document.getElementById("showMenu")
         if(theme==0){
             document.body.className="theme1" //on chosit le theme 1
 
             //pour le thème 1 on n'affiche pas le menu
-            var menu= document.getElementById("showMenu")
             menu.style.display="none"
             menu.nextElementSibling.style.display="none"
+            document.getElementById("showMenu").checked=false
         }else if (theme==1){
             document.body.className="theme2"
+            //permet de bien afficher le bouton du menu si il a été enlevé
+            menu.style.display="initial"
+            menu.nextElementSibling.style.display="initial"
         }else{
             document.body.className="theme3"
+            //permet d'afficher le bouton du menu si il a été enlevé
+            menu.style.display="initial"
+            menu.nextElementSibling.style.display="initial"
         }
     }
 
