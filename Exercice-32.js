@@ -17,10 +17,10 @@ function bouton2(){
 function bouton3(){
     var elemList = document.querySelectorAll("p")
     let i =0;
-    while(i<elemList.length){
-        if(elemList[i].style.fontStyle != "italic"){
+    while(i<elemList.length){ //pour tous les paragraphes p
+        if(elemList[i].style.fontStyle != "italic"){ //si pas déja en italic
             elemList[i].style.fontStyle = "italic";
-            i=elemList.length
+            i=elemList.length //permet de sortir de la boucle 
         }else{
             i++
         }
